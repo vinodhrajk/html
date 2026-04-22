@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dragos Platform Overview — 1898 & Co.</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f5f5f2; margin: 0; padding: 24px; color: #1a1a1a; }
+  h1 { font-size: 20px; font-weight: 600; color: #1F4E79; margin-bottom: 4px; }
+  .subtitle { font-size: 13px; color: #666; margin-bottom: 6px; }
+  .hint { font-size: 12px; color: #999; margin-bottom: 16px; }
+  svg { width: 100%; display: block; background: #fff; border-radius: 10px; border: 1px solid #e0e0e0; }
+  .node { cursor: pointer; }
+  .node rect { transition: opacity .15s; }
+  .node:hover rect { opacity: 0.82; }
+  .detail-panel { margin-top: 16px; border-radius: 10px; border: 1px solid #ddd; background: #fff; padding: 18px 22px; display: none; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .detail-panel.open { display: block; }
+  .detail-title { font-size: 15px; font-weight: 600; color: #1F4E79; margin-bottom: 10px; }
+  .detail-body { font-size: 13px; color: #444; line-height: 1.75; }
+  .detail-body ul { padding-left: 18px; }
+  .detail-body li { margin-bottom: 6px; }
+  .detail-body strong { color: #1a1a1a; }
+  .close-btn { float: right; font-size: 12px; color: #999; cursor: pointer; border: 1px solid #ddd; border-radius: 4px; padding: 2px 8px; background: #f5f5f5; }
+  .close-btn:hover { background: #eee; }
+  .footer { margin-top: 20px; font-size: 11px; color: #aaa; border-top: 1px solid #e0e0e0; padding-top: 10px; }
+</style>
+</head>
+<body>
+
+<h1>Dragos Platform Overview</h1>
+<p class="subtitle">Electric / Utilities OT/ICS environment &nbsp;·&nbsp; 1898 & Co. Managed Security Services</p>
+<p class="hint">Click any box to learn more</p>
+
+<svg viewBox="0 0 780 640" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Layer labels -->
+  <text x="20" y="72" font-family="Arial" font-size="11" fill="#aaa">Rule sources</text>
+  <text x="20" y="218" font-family="Arial" font-size="11" fill="#aaa">Detection layer</text>
+  <text x="20" y="364" font-family="Arial" font-size="11" fill="#aaa">Tuning layer</text>
+  <text x="20" y="510" font-family="Arial" font-size="11" fill="#aaa">Outputs</text>
+
+  <!-- Dividers -->
+  <line x1="160" y1="82" x2="760" y2="82" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="160" y1="228" x2="760" y2="228" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="160" y1="374" x2="760" y2="374" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="160" y1="516" x2="760" y2="516" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- RULE SOURCES -->
+  <g class="node" onclick="show('community')">
+    <rect x="168" y="90" width="200" height="58" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/>
+    <text x="268" y="114" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0C447C">Community rules</text>
+    <text x="268" y="134" text-anchor="middle" font-family="Arial" font-size="11" fill="#185FA5">Managed by Dragos · read-only</text>
+  </g>
+
+  <g class="node" onclick="show('kp')">
+    <rect x="390" y="90" width="200" height="58" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.8"/>
+    <text x="490" y="114" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#3C3489">Knowledge packs</text>
+    <text x="490" y="134" text-anchor="middle" font-family="Arial" font-size="11" fill="#534AB7">Threat intel · IOCs · updates</text>
+  </g>
+
+  <g class="node" onclick="show('custom')">
+    <rect x="612" y="90" width="140" height="58" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+    <text x="682" y="114" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#085041">Custom rules</text>
+    <text x="682" y="134" text-anchor="middle" font-family="Arial" font-size="11" fill="#0F6E56">User-created · optional</text>
+  </g>
+
+  <!-- Connectors: rule sources → detection layer -->
+  <path d="M268 148 L268 236" fill="none" stroke="#BFBFBF" stroke-width="0.8" marker-end="url(#arr)"/>
+  <path d="M682 148 L420 236" fill="none" stroke="#BFBFBF" stroke-width="0.8" marker-end="url(#arr)"/>
+  <path d="M490 148 L490 175 L450 175" fill="none" stroke="#BFBFBF" stroke-width="0.8" stroke-dasharray="3 3" marker-end="url(#arr)"/>
+  <text x="440" y="172" text-anchor="end" font-family="Arial" font-size="10" fill="#bbb">enriches</text>
+
+  <!-- DETECTION LAYER -->
+  <g class="node" onclick="show('atomic')">
+    <rect x="168" y="236" width="200" height="58" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.8"/>
+    <text x="268" y="260" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#2C2C2A">Atomic detections</text>
+    <text x="268" y="280" text-anchor="middle" font-family="Arial" font-size="11" fill="#5F5E5A">Sev 0–2 · fixed severity</text>
+  </g>
+
+  <g class="node" onclick="show('correlation')">
+    <rect x="390" y="236" width="200" height="58" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+    <text x="490" y="260" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#085041">Correlation engine</text>
+    <text x="490" y="280" text-anchor="middle" font-family="Arial" font-size="11" fill="#0F6E56">In-platform · always running</text>
+  </g>
+
+  <g class="node" onclick="show('composite')">
+    <rect x="390" y="310" width="200" height="58" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.8"/>
+    <text x="490" y="334" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#791F1F">Composite detections</text>
+    <text x="490" y="354" text-anchor="middle" font-family="Arial" font-size="11" fill="#A32D2D">Sev 3–5 · new alert fires</text>
+  </g>
+
+  <!-- Connectors: detection layer -->
+  <path d="M368 265 L388 265" fill="none" stroke="#BFBFBF" stroke-width="0.8" marker-end="url(#arr)"/>
+  <path d="M490 294 L490 308" fill="none" stroke="#BFBFBF" stroke-width="0.8" marker-end="url(#arr)"/>
+  <path d="M268 294 L268 392 L346 392" fill="none" stroke="#BFBFBF" stroke-width="0.8" marker-end="url(#arr)"/>
+  <path d="M490 368 L490 384 L434 392" fill="none" stroke="#BFBFBF" stroke-width="0.8" marker-end="url(#arr)"/>
+
+  <!-- TUNING LAYER -->
+  <g class="node" onclick="show('notif')">
+    <rect x="168" y="382" width="470" height="58" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.8"/>
+    <text x="403" y="406" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#633806">Notification rules</text>
+    <text x="403" y="426" text-anchor="middle" font-family="Arial" font-size="11" fill="#854F0B">Only tuning mechanism · top-down · first match wins</text>
+  </g>
+
+  <!-- Connectors: tuning → outputs -->
+  <path d="M268 440 L268 524" fill="none" stroke="#BFBFBF" stroke-width="0.8" marker-end="url(#arr)"/>
+  <path d="M403 440 L403 524" fill="none" stroke="#BFBFBF" stroke-width="0.8" marker-end="url(#arr)"/>
+  <path d="M538 440 L538 524" fill="none" stroke="#BFBFBF" stroke-width="0.8" marker-end="url(#arr)"/>
+
+  <!-- OUTPUTS -->
+  <g class="node" onclick="show('siem')">
+    <rect x="168" y="524" width="140" height="58" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.8"/>
+    <text x="238" y="548" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#0C447C">SIEM / SOC</text>
+    <text x="238" y="568" text-anchor="middle" font-family="Arial" font-size="11" fill="#185FA5">Sev 3+ only</text>
+  </g>
+
+  <g class="node" onclick="show('inplatform')">
+    <rect x="328" y="524" width="150" height="58" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+    <text x="403" y="548" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#085041">In-platform</text>
+    <text x="403" y="568" text-anchor="middle" font-family="Arial" font-size="11" fill="#0F6E56">Sev 0–2 retained</text>
+  </g>
+
+  <g class="node" onclick="show('suppressed')">
+    <rect x="498" y="524" width="140" height="58" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.8"/>
+    <text x="568" y="548" text-anchor="middle" font-family="Arial" font-size="13" font-weight="600" fill="#2C2C2A">Suppressed</text>
+    <text x="568" y="568" text-anchor="middle" font-family="Arial" font-size="11" fill="#5F5E5A">Forwarding only</text>
+  </g>
+
+  <!-- Legend -->
+  <text x="168" y="610" font-family="Arial" font-size="11" fill="#aaa">Click any box to expand details &nbsp;·&nbsp; 1898 & Co. Managed Security Services &nbsp;·&nbsp; Dragos Platform Overview</text>
+
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#BFBFBF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+</svg>
+
+<div class="detail-panel" id="detail-panel">
+  <button class="close-btn" onclick="document.getElementById('detail-panel').classList.remove('open')">close ✕</button>
+  <div class="detail-title" id="detail-title"></div>
+  <div class="detail-body" id="detail-body"></div>
+</div>
+
+<div class="footer">Prepared by 1898 & Co. Managed Security Services &nbsp;·&nbsp; Reference: Dragos Partner Support (Clark Richter, April 2026) &nbsp;·&nbsp; Confidential — Internal Use Only</div>
+
+<script>
+const info = {
+  community: {
+    title: "Community rules — managed by Dragos, read-only",
+    body: `<ul>
+      <li><strong>What they are:</strong> Detection rules written and maintained entirely by Dragos. They cover known ICS adversary techniques, protocol anomalies, and threat behaviours across all supported verticals including Electric Utility.</li>
+      <li><strong>Can we edit them?</strong> No. Community rules are read-only. We cannot modify the logic, threshold, or severity of a Community rule.</li>
+      <li><strong>Remote vs local:</strong> Rules marked "Remote" run on the Sensor in memory — they watch for multi-threshold patterns before firing. These are the rules that feed composite detection logic.</li>
+      <li><strong>How we tune them:</strong> We cannot change the rule itself. The only lever is a Notification Rule — which controls what happens to the alert after it fires (suppress, re-route, change severity).</li>
+      <li><strong>Updates:</strong> Community rules are updated via Knowledge Pack deployments pushed by Dragos.</li>
+    </ul>`
+  },
+  kp: {
+    title: "Knowledge packs — threat intelligence and content updates",
+    body: `<ul>
+      <li><strong>What they are:</strong> Bundled updates from Dragos containing new/updated detection rules, threat intelligence, IOCs, and adversary context. Released on a regular cadence.</li>
+      <li><strong>Do they reduce false positives?</strong> No. Knowledge packs update detection content only. They do not tune notification routing or suppress existing alerts.</li>
+      <li><strong>Adversary coverage:</strong> KPs include context on threat groups like VOLTZITE, ELECTRUM, and CHERNOVITE — particularly relevant for Electric Utility environments. This context appears in detection details to inform analyst triage.</li>
+      <li><strong>Do they affect tuning?</strong> No. KPs have nothing to do with Notification Rules. All tuning remains manual.</li>
+    </ul>`
+  },
+  custom: {
+    title: "Custom rules — user-created detections",
+    body: `<ul>
+      <li><strong>Can we create them?</strong> Yes — Dragos allows users to create custom detection rules for environment-specific behaviours that Community rules don't cover.</li>
+      <li><strong>When to use them:</strong> Best for highly specific behaviours unique to this client's setup — e.g., a particular asset communicating on an unexpected port that only exists in their environment.</li>
+      <li><strong>Important limitation:</strong> Custom rules do not have Dragos threat intelligence backing. Our team owns and maintains them — Dragos will not update or support them.</li>
+      <li><strong>Bottom line:</strong> Use sparingly, document thoroughly, and review during quarterly tuning sessions.</li>
+    </ul>`
+  },
+  atomic: {
+    title: "Atomic detections — Sev 0–2, fixed severity",
+    body: `<ul>
+      <li><strong>What they are:</strong> Individual, single-event observations. Each fires independently based on one detected behaviour — a suspicious file transfer, a new device, an unusual protocol command.</li>
+      <li><strong>Severity:</strong> Fixed permanently at the level assigned by Dragos. A Sev 2 rule will always fire at Sev 2 — no exceptions, no matter the context.</li>
+      <li><strong>Volume:</strong> The vast majority of Dragos alert volume in a new deployment comes from atomic detections. For this Electric Utility client, 80–90% of the 20,000+ alerts are Sev 0–2 atomics.</li>
+      <li><strong>Critical rule:</strong> Never suppress atomic detections inside the platform. Only gate their SIEM forwarding. The correlation engine depends on these events to form composite detections.</li>
+    </ul>`
+  },
+  correlation: {
+    title: "Correlation engine — the escalation mechanism",
+    body: `<ul>
+      <li><strong>What it does:</strong> Continuously watches all in-platform atomic events and matches sequences against known ICS adversary tradecraft patterns.</li>
+      <li><strong>Visibility:</strong> The engine itself is invisible — you only see its output when a composite detection fires. There is no "correlation engine alert."</li>
+      <li><strong>Dependency:</strong> Requires Sev 0–2 atomic events to be present in-platform at all times. If Notification Rules drop those events entirely from the platform, composites will silently stop firing.</li>
+      <li><strong>Community rules marked "Remote"</strong> run on the Sensor in memory and feed the multi-threshold logic that drives this engine.</li>
+    </ul>`
+  },
+  composite: {
+    title: "Composite detections — Sev 3–5, brand new alert",
+    body: `<ul>
+      <li><strong>What they are:</strong> Brand-new, separate alerts fired when the correlation engine matches a multi-step adversary pattern. They do not modify the original atomic alerts — they are entirely new events.</li>
+      <li><strong>Severity scale:</strong> Sev 3 = high-confidence multi-step behaviour. Sev 4 = highly likely malicious ICS activity. Sev 5 = near-certain active attack.</li>
+      <li><strong>For Electric Utility:</strong> Sev 4–5 composites involving DNP3, Modbus, IEC 61850, or GOOSE protocols should be escalated to OT operations immediately — not after investigation.</li>
+      <li><strong>These are the alerts that matter most.</strong> The entire tuning effort on Sev 0–2 exists to ensure analysts can focus exclusively on Sev 3–5 in real time.</li>
+    </ul>`
+  },
+  notif: {
+    title: "Notification rules — the only tuning mechanism",
+    body: `<ul>
+      <li><strong>What they control:</strong> Everything that happens after a detection fires — where it goes, what severity it appears at, whether it reaches the SIEM, whether it's suppressed from the analyst queue.</li>
+      <li><strong>What they do NOT control:</strong> Whether a detection fires in the first place. You cannot stop Dragos from detecting something — only from showing it or sending it somewhere.</li>
+      <li><strong>How they work:</strong> Top-down, first match wins — exactly like a firewall ruleset. Rule order is critical.</li>
+      <li><strong>Naming convention:</strong> PURPOSE-SCOPE-CONDITION-ACTION[-TicketRef]. Example: SUPPRESS-GLOBAL-SEV0-NOSIEM or UPGRADE-ZONE-SIS-CRITICALPLC-SEV+2.</li>
+      <li><strong>Actions available:</strong> Suppress SIEM forwarding, change severity (up or down), route to a specific syslog destination, drop from analyst queue.</li>
+    </ul>`
+  },
+  siem: {
+    title: "SIEM / SOC — Sev 3+ only",
+    body: `<ul>
+      <li>The recommended Notification Rule pattern routes only Sev 3 and above to the SIEM and SOC analyst queues.</li>
+      <li>This is the output analysts monitor in real time. Everything below Sev 3 is reviewed on a scheduled cadence inside the Dragos platform only.</li>
+      <li>Sev 5: immediate on-call paging. Sev 4: SOC queue response. Sev 3: investigate within SLA.</li>
+      <li>For Electric Utility: Sev 4–5 involving substation assets or protection relays should be escalated to OT operations immediately — during investigation, not after.</li>
+    </ul>`
+  },
+  inplatform: {
+    title: "In-platform retention — Sev 0–2",
+    body: `<ul>
+      <li>Sev 0–2 alerts stay inside Dragos even when SIEM forwarding is suppressed. This is intentional and critical to the composite detection chain.</li>
+      <li>The correlation engine reads from in-platform events. If Sev 0–2 are present here, composites can form. If they are dropped entirely, composites will never fire.</li>
+      <li>Analysts review in-platform Sev 0–2 on a scheduled cadence (daily or weekly triage sessions) — not in real time.</li>
+      <li>Over time, the classify-and-tune cycle progressively reduces in-platform Sev 0–2 volume to only meaningful, unclassified events.</li>
+    </ul>`
+  },
+  suppressed: {
+    title: "Suppressed — SIEM forwarding blocked, not deleted",
+    body: `<ul>
+      <li>"Suppressed" means the alert's external forwarding is blocked — it does not reach the SIEM or analyst dashboard.</li>
+      <li>The alert still exists inside the platform. It still feeds the correlation engine. Only its outward visibility is removed.</li>
+      <li><strong>This distinction is critical:</strong> suppression = hide from SIEM. It does not mean delete or ignore inside Dragos.</li>
+      <li>Only suppress alerts that have been classified — confirmed false positives or confirmed benign true positives (accepted risk). Never suppress unclassified alerts.</li>
+    </ul>`
+  }
+};
+
+function show(key) {
+  const d = info[key]; if (!d) return;
+  document.getElementById('detail-title').textContent = d.title;
+  document.getElementById('detail-body').innerHTML = d.body;
+  const panel = document.getElementById('detail-panel');
+  panel.classList.add('open');
+  panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+</script>
+</body>
+</html>
